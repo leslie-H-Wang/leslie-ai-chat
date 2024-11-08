@@ -28,12 +28,13 @@ let tokenExpireTime: number | null = null;
 
 // 获取访问令牌
 async function getAccessToken(): Promise<string> {
-  // 如果已有有效的token，直接返回
-  if (cachedToken && tokenExpireTime && Date.now() < tokenExpireTime) {
-    return cachedToken;
-  }
-
   try {
+    console.log('开始获取访问令牌');
+    // 如果已有有效的token，直接返回
+    if (cachedToken && tokenExpireTime && Date.now() < tokenExpireTime) {
+      return cachedToken;
+    }
+
     const response = await fetch(
       `/oauth/2.0/token?grant_type=client_credentials&client_id=${API_KEY}&client_secret=${SECRET_KEY}`,
       {
@@ -46,6 +47,9 @@ async function getAccessToken(): Promise<string> {
     );
 
     if (!response.ok) {
+      console.error('获取令牌响应不成功:', response.status);
+      const errorText = await response.text();
+      console.error('错误详情:', errorText);
       throw new Error(`获取访问令牌失败: ${response.status}`);
     }
 
@@ -55,10 +59,11 @@ async function getAccessToken(): Promise<string> {
     cachedToken = data.access_token;
     tokenExpireTime = Date.now() + (data.expires_in - 300) * 1000;
     
+    console.log('成功获取访问令牌');
     return data.access_token;
   } catch (error) {
     console.error('获取访问令牌错误:', error);
-    throw new Error('无法获取访问令牌');
+    throw error;
   }
 }
 

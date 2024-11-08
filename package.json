@@ -40,14 +40,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": {
-    "/oauth": {
-      "target": "https://aip.baidubce.com",
-      "changeOrigin": true
-    },
-    "/rpc": {
-      "target": "https://aip.baidubce.com",
-      "changeOrigin": true
-    }
-  }
+  "proxy": "https://aip.baidubce.com"
 }

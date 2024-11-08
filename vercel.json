@@ -1,0 +1,12 @@
+{
+  "rewrites": [
+    {
+      "source": "/oauth/:path*",
+      "destination": "https://aip.baidubce.com/oauth/:path*"
+    },
+    {
+      "source": "/rpc/:path*",
+      "destination": "https://aip.baidubce.com/rpc/:path*"
+    }
+  ]
+} 

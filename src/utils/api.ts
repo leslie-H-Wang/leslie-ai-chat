@@ -71,23 +71,26 @@ export async function sendMessageToAPI(message: string): Promise<string> {
   try {
     const accessToken = await getAccessToken();
     
-    const response = await fetch(`/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro?access_token=${accessToken}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        messages: [
-          {
-            role: 'user',
-            content: message,
-          },
-        ],
-        stream: false,
-        user_id: 'web_user',
-        temperature: 0.7,
-      }),
-    });
+    const response = await fetch(
+      `/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions_pro?access_token=${accessToken}`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [
+            {
+              role: 'user',
+              content: message,
+            },
+          ],
+          stream: false,
+          user_id: 'web_user',
+          temperature: 0.7,
+        }),
+      }
+    );
 
     if (!response.ok) {
       const errorData = await response.json();

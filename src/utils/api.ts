@@ -2,6 +2,9 @@ const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 const API_KEY = process.env.REACT_APP_API_KEY;
 const SECRET_KEY = process.env.REACT_APP_SECRET_KEY;
 
+// 确保 baseURL 配置正确
+const baseURL = process.env.REACT_APP_API_URL || 'https://aip.baidubce.com';
+
 interface AccessTokenResponse {
   access_token: string;
   expires_in: number;

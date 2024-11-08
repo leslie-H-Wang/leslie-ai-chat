@@ -1,16 +1,17 @@
 {
-  "rewrites": [
+  "version": 2,
+  "routes": [
     {
-      "source": "/oauth/:path*",
-      "destination": "https://aip.baidubce.com/oauth/:path*"
+      "src": "/oauth/(.*)",
+      "dest": "https://aip.baidubce.com/oauth/$1"
     },
     {
-      "source": "/rpc/:path*",
-      "destination": "https://aip.baidubce.com/rpc/:path*"
+      "src": "/rpc/(.*)",
+      "dest": "https://aip.baidubce.com/rpc/$1"
     },
     {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ],
   "headers": [
@@ -30,6 +31,13 @@
           "value": "X-Requested-With, Content-Type, Accept"
         }
       ]
+    }
+  ],
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "build" }
     }
   ]
 } 

@@ -1,17 +1,13 @@
 {
   "version": 2,
-  "routes": [
+  "rewrites": [
     {
-      "src": "/oauth/(.*)",
-      "dest": "https://aip.baidubce.com/oauth/$1"
+      "source": "/oauth/:path*",
+      "destination": "https://aip.baidubce.com/oauth/:path*"
     },
     {
-      "src": "/rpc/(.*)",
-      "dest": "https://aip.baidubce.com/rpc/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/rpc/:path*",
+      "destination": "https://aip.baidubce.com/rpc/:path*"
     }
   ],
   "headers": [
@@ -33,11 +29,7 @@
       ]
     }
   ],
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "build" }
-    }
-  ]
+  "buildCommand": "npm run build",
+  "outputDirectory": "build",
+  "framework": "create-react-app"
 } 
